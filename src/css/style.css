@@ -1,5 +1,25 @@
 /*! purgecss start ignore */
 @tailwind base;
 @tailwind components;
+h1 {
+  @apply text-2xl;
+}
+h2 {
+  @apply text-xl;
+}
+h3 {
+  @apply text-lg;
+}
+a {
+  @apply text-orange-400;
+  @apply no-underline;
+}
+a:hover {
+  @apply text-orange-500;
+}
+img {
+  @apply rounded-lg;
+  @apply my-4;
+}
 /*! purgecss end ignore */
 @tailwind utilities;

@@ -4,11 +4,16 @@ const { createProxyMiddleware } = require('http-proxy-middleware')
 
 const fullConfig = resolveConfig(tailwindConfig)
 
+const contentfulConfig = {
+  spaceId: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+}
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Tailwind`,
-    description: `Gatsby starter styled with Tailwind`,
-    author: `@taylorbryant`,
+    title: `Chef Pedro`,
+    description: `Chef Pedro Guilherme blog`,
+    author: `@pedrogspereira`,
   },
   plugins: [
     `gatsby-plugin-eslint`,
@@ -20,7 +25,7 @@ module.exports = {
         short_name: `Chef Pedro`,
         start_url: `/`,
         background_color: fullConfig.theme.colors.white,
-        theme_color: fullConfig.theme.colors.teal['400'],
+        theme_color: fullConfig.theme.colors.orange['200'],
         display: `minimal-ui`,
         icon: `src/images/chef-hat.png`,
       },
@@ -31,11 +36,17 @@ module.exports = {
         postCssPlugins: [
           require(`tailwindcss`)(tailwindConfig),
           require(`autoprefixer`),
-          ...(process.env.NODE_ENV === `production`
-            ? [require(`cssnano`)]
-            : []),
+          ...(process.env.NODE_ENV === `production` ? [require(`cssnano`)] : []),
         ],
       },
+    },
+    'gatsby-transformer-remark',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sharp',
+    {
+      resolve: 'gatsby-source-contentful',
+      options: contentfulConfig,
     },
     `gatsby-plugin-offline`,
   ],
